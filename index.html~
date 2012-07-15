@@ -1,22 +1,3 @@
-<video id='webcam' autoplay></video>
-
-<script>
-  var onFailSoHard = function(e) {
-    console.log('Reeeejected!', e);
-  };
-
-  // Not showing vendor prefixes.
-  navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
-    var video = document.querySelector('.webcam');
-    video.src = window.URL.createObjectURL(localMediaStream);
-
-    // Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
-    // See crbug.com/110938.
-    video.onloadedmetadata = function(e) {
-      // Ready to go. Do some stuff.
-    };
-  }, onFailSoHard);
-</script>
 <html>
 <head>
 <title>QRCODE</title>
@@ -141,11 +122,18 @@ function initCanvas(ww,hh)
  	} 
 
         function captureToCanvas() {
-		flash = document.getElementById("embedflash");
-                navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
-                var video = document.getElementById("qr-canvas");
-                video.src = window.URL.createObjectURL(localMediaStream);
-		qrcode.decode();
+		navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+                destinationType: Camera.DestinationType.DATA_URL
+                }); 
+
+	function onSuccess(imageData) {
+    		imagesrc = "data:image/jpeg;base64," + imageData;
+		qrcode.decode(imagesrc);
+	}
+
+	function onFail(message) {
+    		alert('Failed because: ' + message);
+	}
         }
 </script>
 

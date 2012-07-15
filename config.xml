@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.projectmakeit.qrlink"
+        version   = "0.0.1">
+    <name>qr code access link</name>
+
+    <description>
+        Access control through QR codes
+    </description>
+
+    <author href="http://projectmakeit.com" email="blixa@projectmakeit.com">
+        Blixa Morgan 
+    </author>
+       <feature name="http://api.phonegap.com/1.0/camera"/>
+    </widget>
+
